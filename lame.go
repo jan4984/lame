@@ -133,7 +133,9 @@ func (e *Encoder) Flush() []byte {
 		cOut,
 		C.int(estimatedSize),
 	))
-
+	if bytesOut < 0 {
+		bytesOut = 0;
+	}
 	return out[0:bytesOut]
 }
 
