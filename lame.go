@@ -112,10 +112,12 @@ func (e *Encoder) Encode(buf []byte) []byte {
 
 	cBuf := (*C.short)(unsafe.Pointer(&buf[0]))
 	cOut := (*C.uchar)(unsafe.Pointer(&out[0]))
+	//cNull := (*C.uchar)nil
 
-	bytesOut := C.int(C.lame_encode_buffer_interleaved(
+	bytesOut := C.int(C.lame_encode_buffer(
 		e.handle,
 		cBuf,
+		nil,//cNull,
 		C.int(numSamples),
 		cOut,
 		C.int(estimatedSize),
